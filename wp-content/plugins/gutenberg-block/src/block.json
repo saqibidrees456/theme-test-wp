@@ -8,6 +8,11 @@
 	"icon": "smiley",
 	"description": "Test Description",
 	"attributes": {
+		"photo":{
+			"type": "string",
+			"selector": ".photo img",
+			"attribute": "src"
+		},
 		"txtitle":{
 			"type": "string"
 		}

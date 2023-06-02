@@ -11,10 +11,10 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps, InspectorControls } from "@wordpress/block-editor";
+import { useBlockProps, InspectorControls, MediaUpload } from "@wordpress/block-editor";
 import ServerSideRender from '@wordpress/server-side-render';
 
-import { Panel, PanelBody, PanelRow, TextControl } from "@wordpress/components";
+import { Panel, PanelBody, PanelRow, TextControl, Button } from "@wordpress/components";
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * Those files can contain any CSS code that gets applied to the editor.
@@ -35,6 +35,9 @@ export default function Edit({attributes, setAttributes}) {
 	function changeTitle(title){
 		setAttributes({"txtitle": title});
 	}
+	function selectImage(image){
+		setAttributes({"photo": image.url});
+	}
 	return (
 		<p {...useBlockProps()}>
 			<InspectorControls>
@@ -42,6 +45,9 @@ export default function Edit({attributes, setAttributes}) {
 					<PanelBody title="Settings">
 						<PanelRow>
 							<TextControl label="Title Text" onChange={changeTitle} value={attributes.txtitle}/>
+							<MediaUpload type="image" value={attributes.photo}  onSelect={selectImage} render={ ( { open } ) => (
+					<Button onClick={ open }>Open Media Library</Button>
+				) }/>
 						</PanelRow>
 					</PanelBody>
 				</Panel>
